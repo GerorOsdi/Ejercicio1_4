@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ejercicio1_4.View.regPhotos"
+             BackgroundColor="#2DDAB0">
+    
+    <CollectionView x:Name="lstPhotos" SelectionMode="Single" SelectionChanged="lstPhotos_SelectionChanged">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame Padding="5"
+                       CornerRadius="5"
+                       IsClippedToBounds="False">
+                    <Grid HeightRequest="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition Width=".7*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height=".5*"/>
+                            <RowDefinition Height=".5*"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.RowSpan="2" BackgroundColor="Azure"/>
+                        <Label Grid.Column="1" FontAttributes="Bold" FontSize="Large"
+                               Text="{Binding nombrePhoto}" VerticalOptions="Center"/>
+                        <Label Grid.Row="1" Grid.Column="1" FontSize="Medium"
+                               Text="{Binding descPhoto}"/>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
