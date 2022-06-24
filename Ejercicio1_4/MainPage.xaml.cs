@@ -27,31 +27,39 @@ namespace Ejercicio1_4
 
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            if(PhotoFile == null)
+            try
             {
-                await DisplayAlert("Aviso","No se ha tomado la fotografía","Aceptar");
+                if (PhotoFile == null)
+                {
+                    await DisplayAlert("Aviso", "No se ha tomado la fotografía", "Aceptar");
 
-                return;
-            }
+                    return;
+                }
 
-            var varPhoto = new Photos
+                var varPhoto = new Photos
+                {
+                    Id = 0,
+                    nombrePhoto = txtNombrePhoto.Text,
+                    descPhoto = txtDescPhoto.Text,
+                    bytePhoto = ConvertImageToByteArray()
+                };
+
+
+                var resul = await App.dbPhoto.savePhoto(varPhoto);
+
+                if (resul > 0)
+                {
+                    await DisplayAlert("Notificacion", "Dato Guardado con Exito", "Aceptar");
+                    limpiar();
+                }
+                else
+                {
+                    await DisplayAlert("Erro", "Dato no se pudo almacenar", "Aceptar");
+
+                }
+            }catch(Exception)
             {
-                Id = 0,
-                nombrePhoto = txtNombrePhoto.Text,
-                descPhoto = txtDescPhoto.Text,
-                bytePhoto = ConvertImageToByteArray()
-            };
-
-
-            var resul = await App.dbPhoto.savePhoto(varPhoto);
-
-            if (resul > 0) {
-                await DisplayAlert("Notificacion", "Dato Guardado con Exito", "Aceptar");
-            }
-            else
-            {
-                await DisplayAlert("Erro", "Dato no se pudo almacenar", "Aceptar");
-                limpiar();
+               
             }
 
         }

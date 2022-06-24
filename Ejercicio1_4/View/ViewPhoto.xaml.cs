@@ -13,7 +13,7 @@ namespace Ejercicio1_4.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewPhoto : ContentPage
-    {   
+    {
         object photo;
         public ViewPhoto(byte[] FotoView)
         {
@@ -21,12 +21,12 @@ namespace Ejercicio1_4.View
             photo = FotoView;
         }
 
-        protected async override void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
             ImageSource recurso = null;
-            if(photo != null)
+            if (photo != null)
             {
                 byte[] byteImage = (byte[])photo;
                 recurso = ImageSource.FromStream(() => new MemoryStream(byteImage));
